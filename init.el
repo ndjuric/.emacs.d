@@ -121,5 +121,13 @@
 ;; For editing lisps
 (load "elisp-editing.el")
 
-;; Langauage-specific
+;; Language-specific
 (load "setup-js.el")
+
+;; set by Custom on MacOS
+(custom-set-variables
+ '(coffee-tab-width 2)
+ '(package-selected-packages
+   (quote
+    (exec-path-from-shell tagedit smex projectile php-mode paredit magit ido-ubiquitous))))
+(custom-set-faces)
