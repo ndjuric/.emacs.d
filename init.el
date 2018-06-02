@@ -47,12 +47,8 @@
 (require 'init-treemacs)
 (require 'init-misc)
 
-;; install all packages (if they already not installed by use-package)
 (package-install-selected-packages)
-;;(when (not package-archive-contents)
-;;	(package-refresh-contents))
 
-;; start emacs server only it has not already been started
 (require 'server)
 (unless (server-running-p) (server-start))
 
