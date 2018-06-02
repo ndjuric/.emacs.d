@@ -25,15 +25,6 @@
 ;; By default, Emacs thinks a sentence is a full-stop followed by 2 spaces.
 (setq-default sentence-end-double-space nil)
 
-;; operate on current line if no region is defined
-;; https://github.com/purcell/whole-line-or-region/blob/master/whole-line-or-region.el
-(use-package whole-line-or-region
- :config (whole-line-or-region-global-mode))
-
-(defhydra align-hydra (:color blue)
-  ("r" align-regexp "regexp")
-  ("q" nil "quit"))
-
 ;; expand-region: expand region semantically
 ;; https://github.com/magnars/expand-region.el/tree/f99b7630efcdb47c9c6182489c55fba3bcaee521
 (use-package expand-region

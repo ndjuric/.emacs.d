@@ -32,7 +32,6 @@
 (load (locate-user-emacs-file "init-packages.el") nil :nomessage)
 
 (require 'init-osx)
-(require 'init-hydra)
 (require 'init-buffers)
 (require 'init-visual)
 (require 'init-zenburn)
