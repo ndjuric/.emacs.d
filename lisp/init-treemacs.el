@@ -28,11 +28,12 @@
 
   :bind
   (:map global-map
-        ([f8] . treemacs-toggle)
         ("C-c s t" . treemacs-find-file)))
 
 (use-package treemacs-projectile :defer t
-  :bind (:map global-map
-              ("C-c o p" . treemacs-projectile-toggle)))
+  :bind
+  (:map global-map
+        ([f8] . treemacs)
+        ("C-c o p" . treemacs-projectile-toggle)))
 
 (provide 'init-treemacs)
