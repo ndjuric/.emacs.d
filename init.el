@@ -10,9 +10,16 @@
 
 ;; Packages
 (require 'package)
+(setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (package-initialize)
+
+(unless (package-installed-p 'use-package)
+	(package-refresh-contents)
+	(package-install 'use-package))
+
+(require 'use-package)
 
 ;; init directory / package customization 
 (add-to-list 'load-path (concat user-emacs-directory "lisp/"))
