@@ -6,6 +6,7 @@
     (setq treemacs-follow-after-init t
           treemacs-width 35
           treemacs-indentation 1
+          treemacs-git-integration t
           treemacs-collapse-dirs 3
           treemacs-silent-refresh t
           treemacs-silent-filewatch t
@@ -15,6 +16,8 @@
           treemacs-show-hidden-files t
           treemacs-never-persist nil
           treemacs-is-never-other-window t
+          treemacs-position 'right
+          treemacs-no-png-images t
           treemacs-indentation-string (propertize " ⫶ " 'face 'font-lock-comment-face))
 
     (treemacs-follow-mode t)
@@ -28,12 +31,13 @@
 
   :bind
   (:map global-map
+				([f8] . treemacs)
         ("C-c s t" . treemacs-find-file)))
 
-(use-package treemacs-projectile :defer t
-  :bind
-  (:map global-map
-        ([f8] . treemacs)
-        ("C-c o p" . treemacs-projectile-toggle)))
+(use-package treemacs-projectile
+  :defer t
+  :after treemacs
+  :config
+  (setq treemacs-header-function #'treemacs-projectile-create-header))
 
 (provide 'init-treemacs)
