@@ -1,7 +1,4 @@
-;; company, company-quickhelp, company-statistics
-
 ;; company: auto-completion backend for emacs
-;; http://company-mode.github.io/
 (use-package company
   :config
   (bind-keys

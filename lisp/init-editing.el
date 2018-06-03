@@ -1,4 +1,3 @@
-;;; configuration for all the editing stuff in emacs
 ;; Kill ring
 (setq kill-ring-max 200
       kill-do-not-save-duplicates t
@@ -44,8 +43,6 @@
   :ensure nil
   :defer 2
   :config (save-place-mode))
-
-
 
 (defun xah-clean-empty-lines (&optional *begin *end *n)
   "Replace repeated blank lines to just 1.
@@ -134,8 +131,6 @@ Version 2016-10-15"
            (member major-mode yank-indent-modes))
       (let ((transient-mark-mode nil))
         (yank-advised-indent-function (region-beginning) (region-end)))))
-
-
 
 ;; Update The Timestamp Before saving a file
 (add-hook 'before-save-hook #'time-stamp)

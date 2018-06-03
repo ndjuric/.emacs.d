@@ -1,5 +1,3 @@
-;; All the highlight stuff config
-
 ;; highlight-symbol: move to next/prev occurrences of symbol + highlight
 ;; https://github.com/nschum/highlight-symbol.el
 (use-package highlight-symbol

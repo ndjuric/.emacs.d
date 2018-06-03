@@ -1,13 +1,7 @@
-;; configuration for buffers
-
 ;; prevent switching to a visible buffer
 (setq switch-to-visible-buffer nil)
 
-;;; Uniquify
-;; The library uniquify overrides Emacs’ default mechanism for making buffer
-;; names unique (using suffixes like <2>, <3> etc.) with a more sensible
-;; behaviour which use parts of the file names to make the buffer names
-;; distinguishable.
+;; uniquify buffers
 (use-package uniquify :ensure nil
   :defer 2
   :config
@@ -23,7 +17,6 @@
 (setq auto-revert-verbose nil)
 
 ;;; Reopen Killed File
-;; http://emacs.stackexchange.com/a/3334/115
 (defvar killed-file-list nil
   "List of recently killed files.")
 
@@ -35,10 +28,7 @@
 
 (add-hook 'kill-buffer-hook #'add-file-to-killed-file-list)
 
-;;; Kill/Bury Buffer
-
-;;; Toggle between buffers
-;; http://www.emacswiki.org/emacs/SwitchingBuffers
+;; Toggle between buffers
 (defun toggle-between-buffers ()
   "Toggle between 2 buffers"
   (interactive)

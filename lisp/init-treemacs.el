@@ -1,10 +1,8 @@
-;; treemacs: a tree layout file explorer for Emacs
-;; https://github.com/Alexander-Miller/treemacs
 (use-package treemacs :defer t
   :config
   (progn
     (setq treemacs-follow-after-init t
-          treemacs-width 35
+          treemacs-width 60
           treemacs-indentation 1
           treemacs-git-integration t
           treemacs-collapse-dirs 3
@@ -31,7 +29,7 @@
 
   :bind
   (:map global-map
-				([f8] . treemacs)
+		([f8] . treemacs)
         ("C-c s t" . treemacs-find-file)))
 
 (use-package treemacs-projectile
