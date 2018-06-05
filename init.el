@@ -42,6 +42,7 @@
 (require 'init-treemacs)
 (require 'init-company)
 (require 'init-projectile)
+(require 'init-magit)
 (require 'init-buffers)
 (require 'init-ivy)
 (require 'init-swiper)
