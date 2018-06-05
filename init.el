@@ -40,6 +40,8 @@
 
 (require 'init-osx)
 (require 'init-treemacs)
+(require 'init-ibuffer)
+(require 'init-hydra)
 (require 'init-company)
 (require 'init-projectile)
 (require 'init-magit)
