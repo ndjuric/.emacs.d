@@ -47,6 +47,7 @@
 (require 'init-magit)
 (require 'init-buffers)
 (require 'init-ivy)
+(require 'init-counsel)
 (require 'init-swiper)
 (require 'init-highlight)
 (require 'init-mode-line)
