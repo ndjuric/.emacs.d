@@ -17,8 +17,10 @@
 (setq-default cursor-type '(bar . 1))
 ;; disable annoying cursor blinks
 (blink-cursor-mode -1)
-;; disable the ugly toolbar
+;; disable the toolbar
 (tool-bar-mode -1)
+;; disable the menu bar
+(menu-bar-mode -1)
 ;; silence all bell rings
 (setq ring-bell-function 'ignore)
 ;; Do not make mouse wheel accelerate its action (example: scrolling)
