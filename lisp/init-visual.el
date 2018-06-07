@@ -13,6 +13,8 @@
 ;;; all frame related settings
 ;; cursor settings
 (setq-default cursor-type '(bar . 1))
+;; start in fullscreen
+(toggle-frame-fullscreen)
 ;; disable annoying cursor blinks
 (blink-cursor-mode -1)
 ;; disable the toolbar

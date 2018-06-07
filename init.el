@@ -44,6 +44,7 @@
 (require 'init-hydra)
 (require 'init-company)
 (require 'init-projectile)
+(require 'init-yas)
 (require 'init-magit)
 (require 'init-buffers)
 (require 'init-ivy)
@@ -56,6 +57,7 @@
 (require 'init-visual)
 (require 'init-zenburn)
 (require 'init-minibuffer)
+(require 'init-php)
 
 (package-install-selected-packages)
 
