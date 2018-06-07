@@ -1,4 +1,3 @@
-;; company: auto-completion backend for emacs
 (use-package company
   :config
   (bind-keys
@@ -17,14 +16,15 @@
 
   ;; don't downcase results from company-dabbrev
   (setq company-dabbrev-downcase nil)
+  
   ;; use only buffers with same major-mode for company-dabbrev
   (setq company-dabbrev-other-buffers t)
   (bind-key "C-<tab>" 'company-dabbrev)
 
   (defun ora-company-number ()
     "Forward to `company-complete-number'.
-Unless the number is potentially part of the candidate.
-In that case, insert the number."
+     Unless the number is potentially part of the candidate.
+     In that case, insert the number."
     (interactive)
     (let* ((k (this-command-keys))
            (re (concat "^" company-prefix k)))
@@ -54,7 +54,6 @@ In that case, insert the number."
         company-tooltip-align-annotations t)
 
   ;; Suspend page-break-lines-mode while company menu is active
-  ;; (see https://github.com/company-mode/company-mode/issues/416)
   (defvar sanityinc/page-break-lines-on-p nil)
   (make-variable-buffer-local 'sanityinc/page-break-lines-on-p)
 
@@ -70,21 +69,9 @@ In that case, insert the number."
   (add-hook 'company-completion-finished-hook 'sanityinc/page-break-lines-maybe-reenable)
   (add-hook 'company-completion-cancelled-hook 'sanityinc/page-break-lines-maybe-reenable))
 
-;; company-statistics: sort the company candidates by the statistics
-;; https://github.com/company-mode/company-statistics
 (use-package company-statistics
   :defer 1
   :after company
   :config (company-statistics-mode))
 
 (provide 'init-company)
-
-;;; company-mode
-;; `C-TAB' to complete using company-dabbrev backend
-;; `C-t' to view the documentation of the current completion candidate
-;; `C-w' to jump to the source code of the completion candidate (does not work
-;; with all major-modes)
-;; `C-g' to view the documentation of the current completion candidate in minibuffer
-;; `M-/' to execute `hippie-expand'
-;; Press `0-9' to select that company candidate
-;; Press any non matching character to quit company

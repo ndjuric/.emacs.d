@@ -1,5 +1,3 @@
-;; flash the modeline instead of ringing the bell
-;; https://github.com/purcell/mode-line-bell
 (use-package mode-line-bell
   :defer 1
   :config (mode-line-bell-mode))
@@ -40,10 +38,8 @@
                 mode-line-end-spaces))
 
 ;; Tabs and ribbons for the mode-line
-;; https://github.com/tarsius/moody
 (use-package moody
   :config
-  ;; only use apple-rgb for MacOS
   (when (is-mac-p)
     (setq moody-slant-function #'moody-slant-apple-rgb))
   (setq x-underline-at-descent-line t)
@@ -55,7 +51,6 @@
   (size-indication-mode))
 
 ;; A minor-mode menu for the mode line
-;; https://github.com/tarsius/minions
 (use-package minions
   :init (minions-mode)
   :config

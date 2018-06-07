@@ -1,5 +1,3 @@
-
-;; https://github.com/bbatsov/zenburn-emacs
 (use-package zenburn-theme)
 
 (with-eval-after-load "zenburn-theme"
@@ -56,8 +54,9 @@
    '(vertical-border ((t (:foreground "gray20"))))
 
    ;; strike through unmatched parenthesis
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "red" :inherit unspecified
-                                                        :strike-through t))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "red"
+                                            :inherit unspecified
+                                            :strike-through t))))
 
    ;; org-mode face
    '(org-checkbox ((t (:foreground "gray70" :background nil

@@ -1,22 +1,17 @@
-;; Kill ring
 (setq kill-ring-max 200
       kill-do-not-save-duplicates t
       save-interprogram-paste-before-kill t)
 
 (defun my/clear-kill-ring ()
-  "clears the kill ring"
   (interactive)
   (progn (setq kill-ring nil) (garbage-collect)))
 
 (bind-key "C-c r c" 'my/clear-kill-ring)
 
-;; cutting and pasting uses primary clipboard
 (setq select-enable-primary t)
 (setq select-enable-clipboard t)
 
-;; always insert spaces, do not insert tabs
 (setq-default indent-tabs-mode nil)
-;; set default tab width to 4
 (setq-default tab-width 4)
 
 (setq-default fill-column 80) ;; default is 70
@@ -25,7 +20,6 @@
 (setq-default sentence-end-double-space nil)
 
 ;; expand-region: expand region semantically
-;; https://github.com/magnars/expand-region.el/tree/f99b7630efcdb47c9c6182489c55fba3bcaee521
 (use-package expand-region
   :bind ("C-=" . er/expand-region)
   :config
@@ -46,14 +40,14 @@
 
 (defun xah-clean-empty-lines (&optional *begin *end *n)
   "Replace repeated blank lines to just 1.
-Works on whole buffer or text selection, respects `narrow-to-region'.
+   Works on whole buffer or text selection, respects `narrow-to-region'.
+   *N is the number of newline chars to use in replacement.
+   If 0, it means lines will be joined.
+   By befault, *N is 2. It means, 1 visible blank line.
 
-*N is the number of newline chars to use in replacement.
-If 0, it means lines will be joined.
-By befault, *N is 2. It means, 1 visible blank line.
-
-URL `http://ergoemacs.org/emacs/elisp_compact_empty_lines.html'
-Version 2017-01-27"
+   URL `http://ergoemacs.org/emacs/elisp_compact_empty_lines.html'
+   Version 2017-01-27
+  "
   (interactive
    (if (region-active-p)
        (list (region-beginning) (region-end))
@@ -70,11 +64,10 @@ Version 2017-01-27"
 
 (defun xah-clean-whitespace (&optional *begin *end)
   "Delete trailing whitespace, and replace repeated blank lines to just 1.
-Only space and tab is considered whitespace here.
-Works on whole buffer or text selection, respects `narrow-to-region'.
-
-URL `http://ergoemacs.org/emacs/elisp_compact_empty_lines.html'
-Version 2016-10-15"
+   Only space and tab is considered whitespace here.
+   Works on whole buffer or text selection, respects `narrow-to-region'.
+   URL `http://ergoemacs.org/emacs/elisp_compact_empty_lines.html'
+   Version 2016-10-15"
   (interactive
    (if (region-active-p)
        (list (region-beginning) (region-end))
@@ -118,7 +111,7 @@ Version 2016-10-15"
 
 (defadvice yank (after yank-indent activate)
   "If current mode is one of 'yank-indent-modes, indent yanked text
-(with prefix arg don't indent)."
+   (with prefix arg don't indent)."
   (if (and (not (ad-get-arg 0))
            (--any? (derived-mode-p it) yank-indent-modes))
       (let ((transient-mark-mode nil))
@@ -126,7 +119,7 @@ Version 2016-10-15"
 
 (defadvice yank-pop (after yank-pop-indent activate)
   "If current mode is one of 'yank-indent-modes, indent yanked text
-(with prefix arg don't indent)."
+   (with prefix arg don't indent)."
   (if (and (not (ad-get-arg 0))
            (member major-mode yank-indent-modes))
       (let ((transient-mark-mode nil))
@@ -176,8 +169,8 @@ Version 2016-10-15"
 
 (defun indent-defun (&optional l r)
   "Indent current defun.
-Throw an error if parentheses are unbalanced.
-If L and R are provided, use them for finding the start and end of defun."
+   Throw an error if parentheses are unbalanced.
+   If L and R are provided, use them for finding the start and end of defun."
   (interactive)
   (let ((p (point-marker)))
     (set-marker-insertion-type p t)
@@ -196,7 +189,7 @@ If L and R are provided, use them for finding the start and end of defun."
 
 (defun unfill-paragraph ()
   "Replace newline chars in current paragraph by single spaces.
-This command does the inverse of `fill-paragraph'."
+   This command does the inverse of `fill-paragraph'."
   (interactive)
   (let ((fill-column most-positive-fixnum))
     (call-interactively 'fill-paragraph)))
@@ -204,18 +197,20 @@ This command does the inverse of `fill-paragraph'."
 
 (defun unfill-region (start end)
   "Replace newline chars in region from START to END by single spaces.
-This command does the inverse of `fill-region'."
+   This command does the inverse of `fill-region'."
   (interactive "r")
   (let ((fill-column most-positive-fixnum))
     (fill-region start end)))
 
 (defun xah-title-case-region-or-line (*begin *end)
   "Title case text between nearest brackets, or current line, or text selection.
-Capitalize first letter of each word, except words like {to, of, the, a, in, or, and, …}. If a word already contains cap letters such as HTTP, URL, they are left as is.
+   Capitalize first letter of each word, except words like {to, of, the, a, in, 
+   or, and, …}. If a word already contains cap letters such as HTTP, URL, they
+   are left as is.
 
-When called in a elisp program, *begin *end are region boundaries.
-URL `http://ergoemacs.org/emacs/elisp_title_case_text.html'
-Version 2017-01-11"
+   When called in a elisp program, *begin *end are region boundaries.
+   URL `http://ergoemacs.org/emacs/elisp_title_case_text.html'
+   Version 2017-01-11"
   (interactive
    (if (use-region-p)
        (list (region-beginning) (region-end))
@@ -267,12 +262,10 @@ Version 2017-01-11"
            -strPairs))))))
 
 ;; move-text: move text or region up or down
-;; https://github.com/emacsfodder/move-text
 (use-package move-text
   :config (move-text-default-bindings))
 
 ;; undo-tree: Treat undo history as a tree
-;; https://www.emacswiki.org/emacs/UndoTree
 (use-package undo-tree
   :bind (("s-/" . undo-tree-redo))
   :init (global-undo-tree-mode))
@@ -295,11 +288,10 @@ Version 2017-01-11"
   :bind ("C-c o q" . cycle-quotes))
 
 ;;; Eval and replace last sexp
-;; http://stackoverflow.com/a/3035574/1219634
 (defun eval-and-replace-last-sexp ()
   "Replace an emacs lisp expression (s-expression aka sexp) with its result.
-How to use: Put the cursor at the end of an expression like (+ 1 2) and call
-this command."
+   How to use: Put the cursor at the end of an expression like (+ 1 2) and call
+   this command."
   (interactive)
   (let ((value (eval (preceding-sexp))))
     (kill-sexp -1)
@@ -309,14 +301,14 @@ this command."
 (defadvice basic-save-buffer-2 (around fix-unwritable-save-with-sudo activate)
   "When we save a buffer which is write-protected, try to sudo-save it.
 
-When the buffer is write-protected it is usually opened in
-read-only mode.  Use \\[read-only-mode] to toggle
-`read-only-mode', make your changes and \\[save-buffer] to save.
-Emacs will warn you that the buffer is write-protected and asks
-you to confirm if you really want to save.  If you answer yes,
-Emacs will use sudo tramp method to save the file and then
-reverts it, making it read-only again.  The buffer stays
-associated with the original non-sudo filename."
+   When the buffer is write-protected it is usually opened in
+   read-only mode.  Use \\[read-only-mode] to toggle
+   `read-only-mode', make your changes and \\[save-buffer] to save.
+   Emacs will warn you that the buffer is write-protected and asks
+   you to confirm if you really want to save.  If you answer yes,
+   Emacs will use sudo tramp method to save the file and then
+   reverts it, making it read-only again.  The buffer stays
+   associated with the original non-sudo filename."
            (condition-case err
                (progn
                  ad-do-it)

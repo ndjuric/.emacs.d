@@ -1,4 +1,3 @@
-;; counsel: ivy backends for a lot more commands
 (use-package counsel
   :after ivy
   :bind* (([remap execute-extended-command] . counsel-M-x))

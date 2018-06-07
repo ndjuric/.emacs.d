@@ -15,31 +15,44 @@
 
   (progn
     ;; Magit Submodule support
-    ;; https://www.reddit.com/r/emacs/comments/6aiwk5/how_to_manage_multiple_gitrepositories_at_once/dhf47dg/
-    (dolist (fn '(;; Below will end up being the last of these newly added fns,
+    (dolist (fn '(
+                  ;; Below will end up being the last of these newly added fns,
                   ;; and the last element in `magit-status-sections-hook' too.
                   magit-insert-modules-unpulled-from-upstream
                   magit-insert-modules-unpushed-to-pushremote
                   magit-insert-modules-unpushed-to-upstream
                   magit-insert-modules-unpulled-from-pushremote
                   ;; Below will end up being the first of these newly added fns.
-                  magit-insert-submodules))
+                  magit-insert-submodules
+                  ))
       (magit-add-section-hook 'magit-status-sections-hook `,fn nil :append)))
 
   (defun wh/switch-magit-status-buffer ()
     "Allow switching between open magit status buffers."
     (interactive)
-    (let* ((buffers (--filter (eq #'magit-status-mode (with-current-buffer it major-mode))
-                              (buffer-list)))
-           (bufs-with-names (--map (cons
-                                    (with-current-buffer it
-                                      (projectile-project-name))
-                                    it)
-                                   buffers))
+    (let* ((buffers
+            (--filter
+             (eq #'magit-status-mode (with-current-buffer it major-mode))
+             (buffer-list))
+           )
+           (bufs-with-names
+            (--map
+             (cons (with-current-buffer it (projectile-project-name)) it)
+             buffers)
+           )
            (chosen-buf
-            (cdr (assoc (completing-read "Git project: " bufs-with-names)
-                        bufs-with-names))))
-      (switch-to-buffer chosen-buf))))
+            (cdr
+             (assoc
+              (completing-read "Git project: " bufs-with-names)
+              bufs-with-names
+             )
+            )
+           )
+          )
+      (switch-to-buffer chosen-buf)
+    )
+  )
+)
 
 ;; git-timemachine: to rollback to different commits of files
 (use-package git-timemachine

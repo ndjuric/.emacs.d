@@ -1,5 +1,3 @@
-;; https://github.com/Fanael/rainbow-delimiters
-;; different colours for each nested delimiter
 (use-package rainbow-delimiters
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
@@ -56,19 +54,18 @@
 (setq window-combination-resize t)
 
 ;; Show actual lines instead of the page break char ^L
-;; https://github.com/purcell/page-break-lines
 ;; enter page-break character in Emacs by entering `C-q C-l'
 (use-package page-break-lines
   :hook ((prog-mode . page-break-lines-mode)
          (org-mode . page-break-lines-mode)))
 
 ;; column-enforce-mode: highlight characters which exceed fill-column
-;; https://github.com/jordonbiondo/column-enforce-mode
 (use-package column-enforce-mode
   :config
   (add-hook 'prog-mode-hook (lambda ()
                               (unless (eq major-mode 'web-mode)
                                 (column-enforce-mode))))
+  
   ;; enforce a column of 80 for highlighting
   (setq column-enforce-column 80)
   (set-face-attribute 'column-enforce-face nil
@@ -76,19 +73,15 @@
   (setq column-enforce-comments nil))
 
 ;; indicate buffer boundaries in the fringe
-(setq-default indicate-buffer-boundaries '((top . right)
-                                           (bottom . right)))
+(setq-default indicate-buffer-boundaries '((top . right) (bottom . right)))
 
 ;; dimer: Interactively highlight which buffer is active by dimming the others.
-;; https://github.com/gonewest818/dimmer.el/tree/master
 (use-package dimmer
   :hook ((after-init . dimmer-mode))
   :config
   (setq-default dimmer-fraction 0.1))
 
 ;; fontify-face: Fontify symbols representing faces with that face.
-;; https://github.com/Fuco1/fontify-face/tree/master
-(use-package fontify-face
-  :defer t)
+(use-package fontify-face :defer t)
 
 (provide 'init-visual)

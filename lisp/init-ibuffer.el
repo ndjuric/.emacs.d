@@ -1,10 +1,8 @@
-;; ibuffer: for easy management of buffers
 (use-package ibuffer
   :ensure nil
   :config
 
   ;; ibuffer-vc: show version control info in ibuffer
-  ;; https://github.com/purcell/ibuffer-vc
   (use-package ibuffer-vc
     :config
     (add-hook 'ibuffer-hook
@@ -60,13 +58,13 @@
 
   (defhydra hydra-ibuffer-main (:color pink :hint nil)
     "
- ^Navigation^ | ^Mark^        | ^Actions^        | ^View^
--^----------^-+-^----^--------+-^-------^--------+-^----^-------
-  _k_:    ʌ   | _m_: mark     | _D_: delete      | _g_: refresh
- _RET_: visit | _u_: unmark   | _S_: save        | _s_: sort
-  _j_:    v   | _*_: specific | _a_: all actions | _/_: filter
--^----------^-+-^----^--------+-^-------^--------+-^----^-------
-"
+     ^Navigation^ | ^Mark^        | ^Actions^        | ^View^
+    -^----------^-+-^----^--------+-^-------^--------+-^----^-------
+      _k_:    ʌ   | _m_: mark     | _D_: delete      | _g_: refresh
+     _RET_: visit | _u_: unmark   | _S_: save        | _s_: sort
+      _j_:    v   | _*_: specific | _a_: all actions | _/_: filter
+    -^----------^-+-^----^--------+-^-------^--------+-^----^-------
+    "
     ("j" ibuffer-forward-line)
     ("RET" ibuffer-visit-buffer :color blue)
     ("k" ibuffer-backward-line)

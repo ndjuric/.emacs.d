@@ -1,7 +1,5 @@
-;; prevent switching to a visible buffer
 (setq switch-to-visible-buffer nil)
 
-;; uniquify buffers
 (use-package uniquify :ensure nil
   :defer 2
   :config
@@ -16,7 +14,6 @@
 (setq auto-revert-remote-files t)
 (setq auto-revert-verbose nil)
 
-;;; Reopen Killed File
 (defvar killed-file-list nil
   "List of recently killed files.")
 
@@ -28,7 +25,6 @@
 
 (add-hook 'kill-buffer-hook #'add-file-to-killed-file-list)
 
-;; Toggle between buffers
 (defun toggle-between-buffers ()
   "Toggle between 2 buffers"
   (interactive)
@@ -107,7 +103,7 @@
 (global-set-key [remap previous-buffer] 'my-previous-buffer)
 
 (defun wh/switch-buffers-same-mode ()
-  "Allows us to switch between buffers of the same major mode"
+  "switch between buffers of the same major mode"
   (interactive)
   (let* ((matching-bufs (--filter (eq major-mode (with-current-buffer it major-mode))
                                   (buffer-list)))
@@ -125,8 +121,7 @@
     (switch-to-buffer chosen-buf)))
 (bind-key "C-x B" #'wh/switch-buffers-same-mode)
 
-;; beginend: Emacs package to redefine M-< and M-> for some modes
-;; https://github.com/DamienCassou/beginend
+;; redefine M-< and M-> for some modes
 (use-package beginend
   :config
   (beginend-global-mode)
@@ -136,47 +131,5 @@
     (progn
       (ivy-occur-previous-line 1)))
   (add-hook 'ivy-occur-grep-mode-hook #'beginend-ivy-occur-mode))
-
-(defun duplicate-buffer (new-name)
-  "Create a copy of the current buffer with the filename NEW-NAME.
-The original buffer and file are untouched."
-  (interactive (list (read-from-minibuffer "New name: " (buffer-file-name))))
-
-  (let ((filename (buffer-file-name))
-        (new-directory (file-name-directory new-name))
-        (contents (buffer-substring (point-min) (point-max))))
-    (unless filename (error "Buffer '%s' is not visiting a file!" (buffer-name)))
-
-    (make-directory new-directory t)
-    (find-file new-name)
-    (insert contents)
-    (basic-save-buffer)))
-
-;;; Narrow/Widen
-;; http://endlessparentheses.com/emacs-narrow-or-widen-dwim.html
-(defun endless/narrow-or-widen-dwim (p)
-  "Widen if buffer is narrowed, narrow-dwim otherwise.
-Dwim means: region, org-src-block, org-subtree, or defun,
-whichever applies first. Narrowing to org-src-block actually
-calls `org-edit-src-code'.
-With prefix P, don't widen, just narrow even if buffer is already
-narrowed."
-  (interactive "P")
-  (declare (interactive-only))
-  (cond ((and (buffer-narrowed-p) (not p))
-         (widen))
-        ((region-active-p)
-         (narrow-to-region (region-beginning) (region-end)))
-        ((derived-mode-p 'org-mode)
-         (cond
-          ((ignore-errors (org-edit-src-code) t))
-          ((ignore-errors (org-narrow-to-block) t))
-          (t
-           (org-narrow-to-subtree))))
-        ((derived-mode-p 'latex-mode)
-         (LaTeX-narrow-to-environment))
-        (t
-         (narrow-to-defun))))
-(bind-key "C-x n n" #'endless/narrow-or-widen-dwim)
 
 (provide 'init-buffers)

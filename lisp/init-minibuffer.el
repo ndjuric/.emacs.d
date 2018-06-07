@@ -1,6 +1,3 @@
-;; configuration for minibuffer
-
-;; http://oremacs.com/2016/06/06/counsel-set-variable/
 (when (not (bound-and-true-p disable-recursive-edit-in-minibuffer))
   ;; Allow to read from minibuffer while in minibuffer.
   (setq enable-recursive-minibuffers t)
