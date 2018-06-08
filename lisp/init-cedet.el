@@ -15,6 +15,9 @@
 (add-hook 'c-mode-hook 'my/cedet-hook)
 (add-hook 'c++-mode-hook 'my/cedet-hook)
 
+;; setup GDB
+(setq gdb-many-windows t gdb-show-main t)
+
 (require 'ede)
 (global-ede-mode)
 
