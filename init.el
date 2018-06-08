@@ -55,6 +55,8 @@
 (require 'init-visual)
 (require 'init-zenburn)
 (require 'init-minibuffer)
+(require 'init-cedet)
+(require 'init-c)
 (require 'init-php)
 
 (package-install-selected-packages)
