@@ -41,6 +41,7 @@
 (require 'init-ibuffer)
 (require 'init-hydra)
 (require 'init-company)
+(require 'init-ace-window)
 (require 'init-projectile)
 (require 'init-yas)
 (require 'init-magit)
