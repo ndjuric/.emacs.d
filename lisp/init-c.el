@@ -5,7 +5,8 @@
 ;; hs-minor-mode for folding source code
 (add-hook 'c-mode-common-hook 'hs-minor-mode)
 
-(setq c-default-style "linux")
+(setq c-default-style "linux"
+      c-basic-offset 4)
 
 (use-package cc-mode
   :init
