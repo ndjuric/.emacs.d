@@ -30,6 +30,7 @@
 (load custom-file :noerror :nomessage) ;; silent load
 
 (require 'init-general)
+(require 'init-osx)
 (require 'init-visual)
 ;;(require 'init-ivy-counsel)
 (require 'init-helm)
