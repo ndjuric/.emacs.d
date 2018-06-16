@@ -34,6 +34,7 @@
 (require 'init-helm)
 (require 'init-helm-gtags)
 (require 'init-cedet)
+(require 'init-c)
 (require 'init-editing)
 
 (package-install-selected-packages)
