@@ -18,6 +18,10 @@
 
 (require 'use-package)
 (setq use-package-always-ensure t)
+(use-package system-packages)
+(use-package key-chord :config (key-chord-mode 1))
+(use-package use-package-chords)
+(use-package use-package-ensure-system-package)
 
 (add-to-list 'load-path (concat user-emacs-directory "lisp/"))
 
@@ -33,6 +37,7 @@
 (require 'init-osx)
 (require 'init-visual)
 ;;(require 'init-ivy-counsel)
+(require 'init-buffers)
 (require 'init-helm)
 (require 'init-helm-gtags)
 (require 'init-minibuffer)
