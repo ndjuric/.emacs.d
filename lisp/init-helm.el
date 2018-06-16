@@ -94,7 +94,7 @@
               #'(lambda ()
                   (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
 
-;;; Save current position to mark ring
+    ;;; Save current position to mark ring
     (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
 
     ;; show minibuffer history with Helm

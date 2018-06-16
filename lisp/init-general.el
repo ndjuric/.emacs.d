@@ -1,9 +1,10 @@
-(menu-bar-mode -1)
-(tool-bar-mode -1)
+(setq confirm-kill-emacs #'y-or-n-p)
 
-(setq inhibit-startup-message t)
+(defun is-mac-p ()
+  (eq system-type 'darwin))
 
-(defalias 'yes-or-no-p 'y-or-n-p)
+(defun is-linux-p ()
+  (eq system-type 'gnu/linux))
 
 ;; show unncessary whitespace that can mess up your diff
 (add-hook 'prog-mode-hook
@@ -24,14 +25,11 @@
 
 ;; setup GDB
 (setq
- ;; use gdb-many-windows by default
  gdb-many-windows t
-
- ;; Non-nil means display source file containing the main routine at startup
  gdb-show-main t
- )
+)
 
-;; company
+;; Package: company
 (use-package company
   :init
   (global-company-mode 1)
@@ -47,7 +45,6 @@
 (use-package zygospore
   :bind (("C-x 1" . zygospore-toggle-delete-other-windows)
          ("RET" .   newline-and-indent)))
-
   ; automatically indent when press RET
 
 ;; activate whitespace-mode to view all whitespace characters

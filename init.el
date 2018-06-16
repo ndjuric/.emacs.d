@@ -30,12 +30,16 @@
 (load custom-file :noerror :nomessage) ;; silent load
 
 (require 'init-general)
-(require 'init-ivy-counsel)
+(require 'init-visual)
+;;(require 'init-ivy-counsel)
 (require 'init-helm)
 (require 'init-helm-gtags)
+(require 'init-minibuffer)
+(require 'init-mode-line)
 (require 'init-cedet)
 (require 'init-c)
 (require 'init-editing)
+(require 'init-zenburn)
 
 (package-install-selected-packages)
 

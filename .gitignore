@@ -1,5 +1,7 @@
 elpa
-projectile-bookmarks.eld
 ede-projects.el
 eshell
 *~
+*#*
+*.elc
+*.eld
