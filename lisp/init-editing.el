@@ -37,6 +37,17 @@
                                           newline-mark))
                             (whitespace-mode 1)))
 
+(use-package olivetti)
+
+(add-hook 'text-mode-hook
+          (lambda ()
+            (variable-pitch-mode 1)
+            (olivetti-mode 1)
+            (flyspell-mode 1)
+            (set-face-attribute 'default nil :family "Iosevka" :height 130)
+            (set-face-attribute 'fixed-pitch nil :family "Iosevka")
+            (set-face-attribute 'variable-pitch nil :family "Baskerville")
+            ))
 ;; Package: volatile-highlights
 ;; GROUP: Editing -> Volatile Highlights
 (use-package volatile-highlights

@@ -3,11 +3,7 @@
   :mode ("\\.org\\'" . org-mode)
   :bind (("C-c l" . org-store-link)
          ("C-c c" . org-capture)
-         ("C-c a" . org-agenda)
-         ("C-c b" . org-iswitchb)
-         ("C-c C-w" . org-refile)
-         ("C-c j" . org-clock-goto)
-         ("C-c C-x C-o" . org-clock-out))
+         ("C-c a" . org-agenda))
   :config
   (progn
     ;; The GTD part of this config is heavily inspired by
@@ -33,7 +29,9 @@
           '(("~/org/gtd/gtd.org" :maxlevel . 3)
             ("~/org/gtd/someday.org" :level . 1)
             ("~/org/gtd/tickler.org" :maxlevel . 2)))
-    (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+    (setq org-todo-keywords '
+          ((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+    )
     (setq org-agenda-custom-commands
           '(("@" "Contexts"
              ((tags-todo "@email"
@@ -42,7 +40,9 @@
                          ((org-agenda-overriding-header "Phone")))))))
     (setq org-clock-persist t)
     (org-clock-persistence-insinuate)
-    (setq org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))))
+    (setq org-time-clocksum-format '
+          (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)
+)))
 
 (use-package org-bullets
   :ensure t

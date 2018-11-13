@@ -46,7 +46,7 @@
 ;;(require 'init-c)
 (require 'init-editing)
 (require 'init-zenburn)
-;;(require 'init-org)
+(require 'init-org)
 
 (package-install-selected-packages)
 
