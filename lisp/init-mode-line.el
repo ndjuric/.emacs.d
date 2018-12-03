@@ -2,26 +2,6 @@
   :defer 1
   :config (mode-line-bell-mode))
 
-(defvar mu-eyebrowse-mode-line
-  '(:propertize
-    (:eval
-     (when (and (bound-and-true-p eyebrowse-mode)
-                (< 1 (length (eyebrowse--get 'window-configs))))
-       (let* ((num (eyebrowse--get 'current-slot))
-              (tag (when num
-                     (nth 2 (assoc num (eyebrowse--get 'window-configs)))))
-              (str (concat
-                    " "
-                    (if (and tag (< 0 (length tag)))
-                        tag
-                      (when num (int-to-string num)))
-                    " ")))
-         str)))
-    face (:background "#81a2be" :foreground "#373b41"))
-  "Mode line format for Eyebrowse.")
-
-(put 'mu-eyebrowse-mode-line 'risky-local-variable t)
-
 (setq-default mode-line-format
               '("%e"
                 mu-eyebrowse-mode-line
@@ -56,15 +36,5 @@
   :config
   (setq minions-mode-line-lighter "#")
   (setq minions-direct '(flycheck-mode)))
-
-;; macro to rename mode-name for major-modes
-(defmacro rename-modeline (package-name mode new-name)
-  `(eval-after-load ,package-name
-     '(defadvice ,mode (after rename-modeline activate)
-        (setq mode-name ,new-name))))
-
-(rename-modeline "js2-mode" js2-mode "JS2")
-(rename-modeline "typescript-mode" typescript-mode "TS")
-(rename-modeline "haskell-mode" haskell-mode "𝞴=")
 
 (provide 'init-mode-line)

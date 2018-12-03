@@ -1,6 +1,8 @@
 (use-package rainbow-delimiters
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
+(use-package gruvbox-theme)
+
 (setq inhibit-startup-message t)
 (setq inhibit-splash-screen t)
 (setq inhibit-startup-echo-area-message t)
@@ -22,13 +24,6 @@
 (setq display-time-format "%a-%d %H:%M")
 (setq display-time-default-load-average nil)
 (display-time-mode)
-
-(setf (cdr (assq 'continuation fringe-indicator-alist))
-      '(nil nil) ;; no continuation indicators
-      ;; '(nil right-arrow) ;; right indicator only
-      ;; '(left-curly-arrow nil) ;; left indicator only
-      ;; '(left-curly-arrow right-curly-arrow) ;; default
-      )
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -61,9 +56,6 @@
                       :underline nil :foreground "firebrick3")
   (setq column-enforce-comments nil))
 
-;; indicate buffer boundaries in the fringe
-(setq-default indicate-buffer-boundaries '((top . right) (bottom . right)))
-
 ;; dimer: Interactively highlight which buffer is active by dimming the others.
 (use-package dimmer
   :ensure t
@@ -85,3 +77,4 @@
 (use-package fontify-face :defer t)
 
 (provide 'init-visual)
+;;; init-visual.el ends here

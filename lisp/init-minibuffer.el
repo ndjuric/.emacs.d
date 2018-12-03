@@ -9,6 +9,7 @@
 
 (defun my-minibuffer-setup-hook ()
   (whole-line-or-region-local-mode -1))
+
 (defun my-minibuffer-exit-hook ()
   (whole-line-or-region-local-mode))
 

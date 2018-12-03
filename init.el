@@ -39,13 +39,9 @@
 (require 'init-ivy-counsel)
 (require 'init-buffers)
 ;;(require 'init-helm)
-;;(require 'init-helm-gtags)
 (require 'init-minibuffer)
 (require 'init-mode-line)
-;;(require 'init-cedet)
-;;(require 'init-c)
 (require 'init-editing)
-(require 'init-zenburn)
 (require 'init-org)
 
 (package-install-selected-packages)

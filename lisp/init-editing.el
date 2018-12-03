@@ -5,8 +5,7 @@
       tab-width 4                       ; default to 4 visible spaces to display a tab
       )
 
-(add-hook 'sh-mode-hook (lambda ()
-                          (setq tab-width 4)))
+(add-hook 'sh-mode-hook (lambda () (setq tab-width 4)))
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
@@ -37,63 +36,24 @@
                                           newline-mark))
                             (whitespace-mode 1)))
 
-(use-package olivetti)
+;; (use-package flycheck
+;; :ensure t
+;; :init (global-flycheck-mode))
 
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
+;;(flycheck-define-checker proselint
+;;  "A linter for prose."
+;;  :command ("proselint" source-inplace)
+;;  :error-patterns
+;;  ((warning line-start (file-name) ":" line ":" column ": "
+;;	        (id (one-or-more (not (any " "))))
+;;	        (message) line-end))
+;;  :modes (text-mode markdown-mode gfm-mode org-mode))
 
-(flycheck-define-checker proselint
-  "A linter for prose."
-  :command ("proselint" source-inplace)
-  :error-patterns
-  ((warning line-start (file-name) ":" line ":" column ": "
-	        (id (one-or-more (not (any " "))))
-	        (message) line-end))
-  :modes (text-mode markdown-mode gfm-mode org-mode))
+;;(add-to-list 'flycheck-checkers 'proselint)
 
-(add-to-list 'flycheck-checkers 'proselint)
-
-(add-hook 'text-mode-hook
-          (lambda ()
-            (variable-pitch-mode 1)
-            (olivetti-mode 1)
-            (flyspell-mode 1)
-            (set-face-attribute 'default nil :family "Iosevka" :height 130)
-            (set-face-attribute 'fixed-pitch nil :family "Iosevka")
-            (set-face-attribute 'variable-pitch nil :family "Baskerville")
-            ))
-;; Package: volatile-highlights
-;; GROUP: Editing -> Volatile Highlights
-(use-package volatile-highlights
-  :init
-  (volatile-highlights-mode t))
-
-;; Package: undo-tree
-;; GROUP: Editing -> Undo -> Undo Tree
 (use-package undo-tree
   :init
   (global-undo-tree-mode 1))
-
-
-;; Package: yasnippet
-;; GROUP: Editing -> Yasnippet
-;; Package: yasnippet
-(use-package yasnippet
-  :defer t
-  :init
-  (add-hook 'prog-mode-hook 'yas-minor-mode))
-
-;; Package: clean-aindent-mode
-(use-package clean-aindent-mode
-  :init
-  (add-hook 'prog-mode-hook 'clean-aindent-mode))
-
-;; Package: dtrt-indent
-(use-package dtrt-indent
-  :init
-  (dtrt-indent-mode 1)
-  (setq dtrt-indent-verbosity 0))
 
 ;; Package: ws-butler
 (use-package ws-butler
@@ -104,34 +64,10 @@
 
 ;; PACKAGE: comment-dwim-2
 (use-package comment-dwim-2
-  :bind (("M-;" . comment-dwim-2))
-  )
-
-;; PACKAGE: anzu
-;; GROUP: Editing -> Matching -> Isearch -> Anzu
-(use-package anzu
-  :init
-  (global-anzu-mode)
-  (global-set-key (kbd "M-%") 'anzu-query-replace)
-  (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp))
-
-;; PACKAGE: iedit
-(use-package iedit
-  :bind (("C-;" . iedit-mode))
-  :init
-  (setq iedit-toggle-key-default nil))
+  :bind (("M-;" . comment-dwim-2)))
 
 ;; Customized functions
 (defun prelude-move-beginning-of-line (arg)
-  "Move point back to indentation of beginning of line.
-
-Move point to the first non-whitespace character on this line.
-If point is already there, move to the beginning of the line.
-Effectively toggle between the first non-whitespace character and
-the beginning of the line.
-
-If ARG is not nil or 1, move forward ARG - 1 lines first. If
-point reaches the beginning or end of the buffer, stop there."
   (interactive "^p")
   (setq arg (or arg 1))
 
@@ -148,8 +84,7 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key (kbd "C-a") 'prelude-move-beginning-of-line)
 
 (defadvice kill-ring-save (before slick-copy activate compile)
-  "When called interactively with no active region, copy a single
-line instead."
+  "When called interactively with no active region, copy a single line instead."
   (interactive
    (if mark-active (list (region-beginning) (region-end))
      (message "Copied line")
@@ -157,8 +92,7 @@ line instead."
            (line-beginning-position 2)))))
 
 (defadvice kill-region (before slick-cut activate compile)
-  "When called interactively with no active region, kill a single
-  line instead."
+  "When called interactively with no active region, kill a single line instead."
   (interactive
    (if mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
