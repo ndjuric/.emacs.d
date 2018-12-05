@@ -36,6 +36,10 @@
                                           newline-mark))
                             (whitespace-mode 1)))
 
+(use-package format-all
+  :bind*
+  ("C-M-<tab>" . format-all-buffer))
+
 ;; (use-package flycheck
 ;; :ensure t
 ;; :init (global-flycheck-mode))
