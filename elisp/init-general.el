@@ -20,6 +20,8 @@
   :init
   (global-company-mode 1))
 
+(use-package flycheck)
+
 (use-package projectile
   :init
   (projectile-global-mode)
