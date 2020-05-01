@@ -34,8 +34,6 @@
 (require 'init-general)
 (require 'init-visual)
 (require 'init-ivy-counsel)
-(require 'init-php)
-(require 'init-lsp)
 
 (package-install-selected-packages)
 
