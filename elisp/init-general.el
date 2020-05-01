@@ -38,7 +38,10 @@
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
-  :hook (go-mode . lsp-deferred))
+    ;; reformat code and add missing (or remove old) imports
+  :hook ((before-save . lsp-format-buffer)
+         (before-save . lsp-organize-imports)))
+;;  :hook (go-mode . lsp-deferred))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
