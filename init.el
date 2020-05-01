@@ -5,7 +5,10 @@
   (setq gc-cons-threshold gc-cons-threshold-original gc-cons-percentage 0.1))
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(setq tls-checktrust t
+      tls-program '("gnutls-cli --x509cafile %t -p %p %h")
+      gnutls-verify-error t)
 
 (package-initialize)
 
