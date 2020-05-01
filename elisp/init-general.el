@@ -26,13 +26,8 @@
 
 (use-package go-mode
   :ensure t
-  :init
-  (progn
-    (setq gofmt-command "goimports")
-    (add-hook 'before-save-hook 'gofmt-before-save)
-    (bind-key [remap find-tag] #'godef-jump))
   :config
-  (add-hook 'go-mode-hook 'electric-pair-mode))
+  (add-hook 'before-save-hook 'lsp-format-buffer))
 
 (use-package go-eldoc
   :ensure t
@@ -62,11 +57,14 @@
 
 ;;lsp-ui-doc-enable is false because I don't like the popover that shows up on the right
 ;;I'll change it if I want it back
-(setq lsp-ui-doc-enable nil
+(setq lsp-ui-doc-enable t
       lsp-ui-peek-enable t
       lsp-ui-sideline-enable t
       lsp-ui-imenu-enable t
-      lsp-ui-flycheck-enable t)
+      lsp-ui-flycheck-enable t
+      lsp-gopls-staticcheck t
+      lsp-eldoc-render-all t
+      lsp-gopls-complete-unimported t)
 
 ;; in-buffer code completion
 (use-package company
@@ -80,6 +78,12 @@
 (use-package company-lsp
   :ensure t
   :commands company-lsp)
+
+;; Optional - provides snippet support.
+(use-package yasnippet
+  :ensure t
+  :commands yas-minor-mode
+  :hook (go-mode . yas-minor-mode))
 
 (use-package projectile
   :init
