@@ -15,21 +15,44 @@
 ;; move between windows using Shift+Arrows
 (windmove-default-keybindings)
 
+(use-package exec-path-from-shell
+  :ensure t
+  :if (memq window-system '(mac ns x))
+  :config
+  (setq exec-path-from-shell-variables '("PATH" "GOPATH"))
+  (exec-path-from-shell-initialize))
+
+(setq exec-path-from-shell-arguments '("-l"))
+
+(use-package go-mode
+  :ensure t
+  :init
+  (progn
+    (setq gofmt-command "goimports")
+    (add-hook 'before-save-hook 'gofmt-before-save)
+    (bind-key [remap find-tag] #'godef-jump))
+  :config
+  (add-hook 'go-mode-hook 'electric-pair-mode))
+
+(use-package go-eldoc
+  :ensure t
+  :defer
+  :init
+  (add-hook 'go-mode-hook 'go-eldoc-setup))
+
 (use-package lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
   :hook (go-mode . lsp-deferred))
 
-;;Set up before-save hooks to format buffer and add/delete imports.
-;;Make sure you don't have other gofmt/goimports hooks enabled.
-
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
-;;Optional - provides fancier overlays.
-
+;; Optional - provides fancier overlays.
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode
