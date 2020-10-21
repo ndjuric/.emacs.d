@@ -12,7 +12,7 @@
 (setq initial-major-mode 'emacs-lisp-mode)
 
 ;(setq-default cursor-type '(bar . 1))
-;(toggle-frame-fullscreen)
+(toggle-frame-fullscreen)
 (blink-cursor-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
